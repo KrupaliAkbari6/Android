@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Gondal">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/gondal" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="119dp"
+        android:text="Gondal is mentioned in texts like Ain-i-Akbari (written in the reign of Akbar) and Mirat-i-Ahmadi as a Vaghela state in Sorath (Saurashtra). The Gondal State in Kathiawar Agency was founded in 1634 by Kumbhojī I from the Jadeja dynasty, who received Ardoi and other villages from his father Merāmanjī.[3] Kumbhoki's fourth descendant, Kumbhoji IV, increased the size of the state by acquiring parganas such as Dhoraji, Upleta, and Sarai Sir Bhagwant Singhji, who reigned from 1888 until his death in 1944, was noted for tax reforms, compulsory education for women, and also for stopping the practice of purdah (female seclusion) at a time when the royal households of India were known for this tradition The Naulakha Palace is the oldest extant palace in Gondal, dating back to the 17th century.[6][7] It has stone carvings with jharokhas (enclosed balconies), a pillared courtyard, delicately carved arches, and a unique spiral staircase. "
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="31dp"
+        android:text="Back" />
+</RelativeLayout>

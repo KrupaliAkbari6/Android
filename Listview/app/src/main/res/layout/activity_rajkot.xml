@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Rajkot">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="431dp"
+        app:srcCompat="@drawable/rajkot" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="85dp"
+        android:text="Rajkot has been under different rulers since it was founded. It has had a long history and had a significant influence in the Indian independence movement. Rajkot was home to many personalities like Mahatma Gandhi. Rajkot is in a transition period of growing cultural, industrial, and economical activities. Rajkot is the 26th largest city in India and the 22nd fastest-growing urban area in the world.Rajkot was the capital of Saurashtra state from 15 April 1948 to 31 October 1956 before merging in bilingual Bombay State on 1 November 1956. Rajkot was merged into Gujarat State from bilingual Bombay state on 1 May 1960. Thakur Saheb Pradyumansinhji died in 1973. His son, Manoharsinhji Pradyumansinhji, has carved out a political career at the provincial level, succeeded him. "
+        android:textSize="17dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="157dp"
+        android:layout_marginBottom="11dp"
+        android:text="Back" />
+
+</RelativeLayout>

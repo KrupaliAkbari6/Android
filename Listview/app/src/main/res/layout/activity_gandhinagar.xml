@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Gandhinagar">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/gandhinagar"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="21dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="115dp"
+        android:text="Gandhinagar lies on the west bank of the Sabarmati River, about 545 km (338 miles) north of Mumbai and 901 km (560 miles) southwest of Delhi.[5] The Akshardham temple is located in Gandhinagar.[6] There was a determination to make Gandhinagar a purely Indian enterprise, partly because the state of Gujarat was the birthplace of Mahatma Gandhi. For this reason, the planning was done by two Indian town planners: Prakash M Apte and H. K. Mewada, who had apprenticed with Le Corbusier in Chandigarh Gandhinagar has an average elevation of 81 metres (266 feet). The city sits on the banks of the Sabarmati River, in north-central-east Gujarat. The 20,543 km2 area around Gandhinagar is defined by Gujarat capital territory. Gandhinagar spans an area of 326 km2 (126 sq mi).[1] The river frequently dries up in the summer, leaving only a small stream of water. "
+        android:textSize="17dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="149dp"
+        android:layout_marginBottom="34dp"
+        android:text="Back" />
+</RelativeLayout>

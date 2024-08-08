@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Surat">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/surat"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="62dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-6dp"
+        android:layout_marginBottom="85dp"
+        android:text="Surat is a city located on the western part of India in the state of Gujarat. It is one of the most dynamic city of India with one of the fastest growth rate due to immigration from various part of Gujarat and other states of India.
+
+Surat is one of the cleanest city of India and is also known by several other names like “THE SILK CITY”, “THE DIAMOND CITY”, “THE GREEN CITY”, etc. It has the most vibrant present and an equally varied heritage of the past. It is the city where the British first land in India. The Dutch and the Portuguese also established there business centers in Surat, the remnants of which are still preserved in the modern day Surat. In past this was a glorious port with ships of more than 84 countries anchored in its harbour at any time.
+
+Still today, Surat of today has earned the reputation of an important industrial hub and commercial center of the country. A glimpse on the history of Surat will prove that the city has always been a great trading center."
+        android:textSize="17dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="155dp"
+        android:layout_marginBottom="12dp"
+        android:text="Back" />
+
+
+</RelativeLayout>
