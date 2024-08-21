@@ -5,9 +5,7 @@ import android.content.DialogInterface
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.contentValuesOf
 import android.text.method.TextKeyListener.clear as clear1
@@ -20,6 +18,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var clearBtn: Button
     lateinit var updateBtn: Button
     lateinit var deleteBtn: Button
+    lateinit var nextBtn: Button
+    lateinit var prevBtn: Button
+    lateinit var firstBtn: Button
+    lateinit var lastBtn: Button
+    lateinit var showBtn: Button
+    lateinit var listView: ListView
+    lateinit var searchView:SearchView
     lateinit var rs: Cursor
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +37,13 @@ class MainActivity : AppCompatActivity() {
         clearBtn = findViewById(R.id.clearbtn)
         updateBtn = findViewById(R.id.updatebtn)
         deleteBtn = findViewById(R.id.deletebtn)
+        nextBtn = findViewById(R.id.nextbtn)
+        prevBtn = findViewById(R.id.previousbtn)
+        firstBtn = findViewById(R.id.firstbtn)
+        lastBtn = findViewById(R.id.lastbtn)
+        showBtn = findViewById(R.id.showBtn)
+        listView = findViewById(R.id.listView)
+        searchView = findViewById(R.id.searchView)
 
         var helper = MyDBHelper(applicationContext)
         var db = helper.writableDatabase
@@ -48,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             cv.put("SNAME", ed_sname.text.toString())
             cv.put("SEM", ed_sem.text.toString())
             db.insert("STUDENT", null, cv)
+            rs = db.rawQuery("SELECT SID _id, SNAME, SEM FROM STUDENT", null)
             showMessage("Record Insert Successfully")
             Clear()
         }
@@ -71,6 +84,27 @@ class MainActivity : AppCompatActivity() {
             rs = db.rawQuery("SELECT SID _id, SNAME, SEM FROM STUDENT", null)
             showMessage("Record Delete Successfully")
             Clear()
+        }
+
+        showBtn.setOnClickListener {
+            searchView.queryHint="search among ${rs.count} records"
+
+            var adapter=SimpleCursorAdapter(applicationContext,R.layout.my_layout,rs,
+                arrayOf("SNAME","SEM"),
+                intArrayOf(R.id.text1,R.id.text2))
+            listView.adapter=adapter
+
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+                   return false
+                }
+
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    rs=db.rawQuery("SELECT SID _id, SNAME,SEM FROM STUDENT WHERE SNAME LIKE '%${p0}%'",null)
+                    adapter.changeCursor(rs)
+                   return false
+                }
+            })
         }
 
 
