@@ -100,12 +100,61 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onQueryTextChange(p0: String?): Boolean {
-                    rs=db.rawQuery("SELECT SID _id, SNAME,SEM FROM STUDENT WHERE SNAME LIKE '%${p0}%'",null)
+                    rs=db.rawQuery("SELECT SID _id, SNAME,SEM FROM STUDENT WHERE SNAME LIKE '%${p0}%' or SEM LIKE '%${p0}%'",null)
                     adapter.changeCursor(rs)
                    return false
                 }
             })
         }
+
+        nextBtn.setOnClickListener {
+            if(rs.moveToNext()){
+                ed_sname.setText(rs.getString(1))
+                ed_sem.setText(rs.getString(2))
+            }
+            else if(rs.moveToFirst()){
+                ed_sname.setText(rs.getString(1))
+                ed_sem.setText(rs.getString(2))
+            }
+            else{
+                Toast.makeText(applicationContext, "Data not found", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        prevBtn.setOnClickListener {
+            if(rs.moveToPrevious()){
+                ed_sname.setText(rs.getString(1))
+                ed_sem.setText(rs.getString(2))
+            }
+            else if(rs.moveToLast()){
+                ed_sname.setText(rs.getString(1))
+                ed_sem.setText(rs.getString(2))
+            }
+            else{
+                Toast.makeText(applicationContext, "Data not found", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        firstBtn.setOnClickListener {
+            if(rs.moveToFirst()){
+                ed_sname.setText(rs.getString(1))
+                ed_sem.setText(rs.getString(2))
+            }
+            else{
+                Toast.makeText(applicationContext, "Data not found", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        lastBtn.setOnClickListener {
+            if(rs.moveToLast()){
+                ed_sname.setText(rs.getString(1))
+                ed_sem.setText(rs.getString(2))
+            }
+            else{
+                Toast.makeText(applicationContext, "Data not found", Toast.LENGTH_LONG).show()
+            }
+        }
+
 
 
 
