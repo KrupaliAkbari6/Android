@@ -10,12 +10,15 @@
 //import android.os.PersistableBundle
 //import android.provider.ContactsContract
 //import android.widget.ListView
+//import android.widget.SearchView
 //import android.widget.SimpleCursorAdapter
 //import androidx.core.app.ActivityCompat
 //import androidx.core.content.ContextCompat
 //import java.util.jar.Manifest
 //
 //class MainActivity : AppCompatActivity() {
+//    lateinit var rs : Cursor
+//    lateinit var adapter : SimpleCursorAdapter
 //    var cols = arrayOf(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,ContactsContract.CommonDataKinds.Phone.NUMBER,ContactsContract.CommonDataKinds.Phone._ID)
 //
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,15 +45,28 @@
 //        if (requestCode == 11 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 //            readContacts()
 //        }
-//        else if (requestCode == 11 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//        else if (requestCode == 12 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 //            readContacts()
 //        }
+//
+//        val searchView: SearchView = findViewById(R.id.searchView)
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                filterContacts(query)
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                filterContacts(newText)
+//                return true
+//            }
+//        })
 //    }
 //
 //    @SuppressLint("Range")
 //    private fun readContacts() {
 //
-//        var rs:Cursor? = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,cols,null,null,null)
+//        rs = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,cols,null,null,null)!!
 //        if(rs!=null) {
 //            var adapter = SimpleCursorAdapter(
 //                applicationContext, android.R.layout.simple_expandable_list_item_2, rs, cols,
@@ -61,7 +77,7 @@
 //
 //            listView.setOnItemClickListener { adapterView, view, i, l ->
 //                rs.moveToPosition(i)
-//                val phoneNumber = rs.getString(rs.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+//                val phoneNumber = rs.getString(i)
 //
 //                // Check if call permission is granted
 //                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
@@ -74,7 +90,7 @@
 //                    makePhoneCall(phoneNumber)
 //                }
 //            }
-//            rs.close()
+//
 //        }
 //        else{}
 //    }
@@ -91,6 +107,24 @@
 //                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE), 12)
 //            }
 //        }
+//    }
+//
+//    private fun filterContacts(query: String?) {
+//        val selection = if (query.isNullOrEmpty()) null else "${ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME} LIKE ?"
+//        val selectionArgs = if (query.isNullOrEmpty()) null else arrayOf("%$query%")
+//        rs = contentResolver.query(
+//            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+//            arrayOf(
+//                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+//                ContactsContract.CommonDataKinds.Phone.NUMBER,
+//                ContactsContract.CommonDataKinds.Phone._ID
+//            ),
+//            selection,
+//            selectionArgs,
+//            null
+//        )!!
+//
+//        adapter.changeCursor(rs)
 //    }
 //
 //}
@@ -113,16 +147,15 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        private const val REQUEST_PERMISSIONS = 1
-    }
 
-    private lateinit var cursor: Cursor
-    private lateinit var adapter: SimpleCursorAdapter
-    private lateinit var listView: ListView
+
+     lateinit var cursor: Cursor
+     lateinit var adapter: SimpleCursorAdapter
+     lateinit var listView: ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,14 +165,23 @@ class MainActivity : AppCompatActivity() {
 
         // Request permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED ||
-            ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE),
-                REQUEST_PERMISSIONS
-            )
-        } else {
+            ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+        {
+//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE), 1)
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_CONTACTS),1)
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE),2)
+        }
+        else
+        {
             readContacts()
+        }
+
+        var fl:FloatingActionButton=findViewById(R.id.floatingActionButton6)
+        fl.setOnClickListener{
+            var i=Intent(Intent.ACTION_INSERT).apply {
+                type=ContactsContract.RawContacts.CONTENT_TYPE
+            }
+            startActivityForResult(i,1)
         }
 
         val searchView: SearchView = findViewById(R.id.searchView)
@@ -208,7 +250,8 @@ class MainActivity : AppCompatActivity() {
                 startActivity(callIntent)
             } else {
                 // Handle permission not granted scenario
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), REQUEST_PERMISSIONS)
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), 2
+                )
             }
         }
     }
@@ -219,7 +262,7 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_PERMISSIONS) {
+        if (requestCode == 1) {
             if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
                 readContacts()
             } else {
