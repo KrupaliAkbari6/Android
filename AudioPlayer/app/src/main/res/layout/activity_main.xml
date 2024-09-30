@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/Audiooffline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Audio" />
+
+    <Button
+        android:id="@+id/stopoffline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stop" />
+
+    <Button
+        android:id="@+id/Audioonline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Audio Online " />
+
+    <Button
+        android:id="@+id/stoponline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stop Online" />
+</LinearLayout>
